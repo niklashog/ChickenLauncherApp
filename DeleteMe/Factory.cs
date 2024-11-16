@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 
-namespace DeleteMe
+namespace ChickenLauncherApp
 {
     public class Factory
     {

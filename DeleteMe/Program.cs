@@ -1,4 +1,4 @@
-﻿namespace DeleteMe
+﻿namespace ChickenLauncherApp
 {
     internal class Program
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteMe", "DeleteMe\DeleteMe.csproj", "{5831A42A-65E4-409F-9CCA-760D5AA5B372}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenLauncherApp", "DeleteMe\ChickenLauncherApp.csproj", "{5831A42A-65E4-409F-9CCA-760D5AA5B372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
