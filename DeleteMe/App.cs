@@ -3,47 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChickenLauncherApp.Counters;
+using ChickenLauncherApp.Interfaces;
+using ChickenLauncherApp.Launchers;
+using ChickenLauncherApp.Menu;
+using ChickenLauncherApp.Factories;
 
 namespace ChickenLauncherApp
 {
     public class App : IApp
     {
-        private IChickenLauncher _launcher;
+        private IChickenLauncher _chickenLauncher;
         private ICustomLauncher _customLauncher;
+        private IChickenCounter _chickenCounter;
+        private ICustomCounter _customCounter;
+        private IDisplayTimesLaunched _displayTimesLaunched;
+        private IDisplayLogo _displayLogo;
+        private IExecuteMenuOption _executeMenuOption;
 
-        public App(IChickenLauncher chickenLauncher, ICustomLauncher customLauncher)
+        public App(
+            IChickenLauncher chickenLauncher, 
+            ICustomLauncher customLauncher,
+            IChickenCounter chickenCounter,
+            ICustomCounter customCounter,
+            IDisplayTimesLaunched displayTimesLaunched,
+            IDisplayLogo displayLogo,
+            IExecuteMenuOption execute)
         {
-            _launcher = chickenLauncher;
+            _chickenLauncher = chickenLauncher;
             _customLauncher = customLauncher;
+            _chickenCounter = chickenCounter;
+            _customCounter = customCounter;
+            _displayTimesLaunched = displayTimesLaunched;
+            _displayLogo = displayLogo;
+            _executeMenuOption = execute;
         }
         public void Run()
         {
-            string[] menuItems = { "Launch chicken", "Load launcher yourself (CAUTION!)", "Back away from launcher.." };
+            string[] menuItems = {
+                "Launch chicken", 
+                "Load launcher yourself (CAUTION!)", 
+                "Back away from launcher.." };
             int selectedIndex = 0;
             bool running = true;
 
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine("Chicken Launcher. Launching chickens since 1974.");
+                Console.WriteLine(_displayLogo.Print());
 
-                // Render menyn
+                //Menu Highlight
                 for (int i = 0; i < menuItems.Length; i++)
                 {
                     if (i == selectedIndex)
                     {
-                        // Highlight the selected menu item
-                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.WriteLine($"> {menuItems[i]}");
                         Console.ResetColor();
                     }
+
                     else
                     {
                         Console.WriteLine($"  {menuItems[i]}");
                     }
                 }
 
-                // Hantera tangenttryckningar
+                _displayTimesLaunched.PrintCounter(_chickenCounter, _customCounter);
+
+
+                //Menu Navigation
+
                 var key = Console.ReadKey(true).Key;
                 switch (key)
                 {
@@ -54,31 +83,14 @@ namespace ChickenLauncherApp
                     case ConsoleKey.DownArrow:
                         selectedIndex = (selectedIndex == menuItems.Length - 1) ? 0 : selectedIndex + 1;
                         break;
-
                     case ConsoleKey.Enter:
-                        ExecuteMenuOption(selectedIndex, ref running);
-                        break;
-                }
-            }
-
-            void ExecuteMenuOption(int index, ref bool running)
-            {
-                switch (index)
-                {
-                    case 0: // Launch chicken
-                        _launcher.Launch();
-                        break;
-
-                    case 1: // Launch custom object
-                        _customLauncher.CustomLaunch();
-                        break;
-
-                    case 2: // Exit
-                        running = false;
-                        break;
-
-                    default:
-                        Console.WriteLine("Invalid option.");
+                        _executeMenuOption.Execute(
+                            selectedIndex, 
+                            ref running, 
+                            _chickenLauncher,
+                            _chickenCounter,
+                            _customLauncher,
+                            _customCounter);
                         break;
                 }
             }

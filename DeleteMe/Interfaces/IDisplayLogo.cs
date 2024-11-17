@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChickenLauncherApp
+namespace ChickenLauncherApp.Interfaces
 {
-    public interface ICustomLauncher
+    public interface IDisplayLogo : IPrint
     {
-        public void CustomLaunch();
     }
 }

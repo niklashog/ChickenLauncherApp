@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChickenLauncherApp.Interfaces;
 
-namespace ChickenLauncherApp
+namespace ChickenLauncherApp.Launchers
 {
     public class CustomLauncher : ICustomLauncher
     {
-        public void CustomLaunch()
+        public void Launch()
         {
             Console.Clear();
             Console.WriteLine("What do you want to put into the launcher?");

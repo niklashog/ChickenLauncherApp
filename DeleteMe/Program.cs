@@ -1,4 +1,7 @@
-﻿namespace ChickenLauncherApp
+﻿using ChickenLauncherApp.Factories;
+using ChickenLauncherApp.Interfaces;
+
+namespace ChickenLauncherApp
 {
     internal class Program
     {
