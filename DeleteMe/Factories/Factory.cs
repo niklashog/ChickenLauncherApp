@@ -21,12 +21,14 @@ namespace ChickenLauncherApp.Factories
             var builder = new ContainerBuilder();
             builder.RegisterType<App>().As<IApp>();
             builder.RegisterType<ChickenLauncher>().As<IChickenLauncher>();
-            builder.RegisterType<ChickenCounter>().As<IChickenCounter>();
+            builder.RegisterType<ChickenCounter>().As<IChickenCounter>().SingleInstance();
             builder.RegisterType<CustomLauncher>().As<ICustomLauncher>();
-            builder.RegisterType<CustomCounter>().As<ICustomCounter>();
-            builder.RegisterType<DisplayTimesLaunched>().As<IDisplayTimesLaunched>();
+            builder.RegisterType<CustomCounter>().As<ICustomCounter>().SingleInstance();
+            builder.RegisterType<DisplayLaunchCounter>().As<IDisplayLaunchCounter>();
             builder.RegisterType<DisplayLogo>().As<IDisplayLogo>();
             builder.RegisterType<ExecuteMenuOption>().As<IExecuteMenuOption>();
+            builder.RegisterType<MenuNavigation>().As<IMenuNavigation>();
+            builder.RegisterType<MenuHighlight>().As<IMenuHighlight>();
 
             _container = builder.Build();
         }

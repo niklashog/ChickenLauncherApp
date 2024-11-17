@@ -9,15 +9,15 @@ namespace ChickenLauncherApp.Counters
 {
     public class ChickenCounter : IChickenCounter
     {
-        private int _countChickens;
-        public int Count()
+        private int _chickenCounter;
+        public void Count()
         {
-            return _countChickens += 1;
+            _chickenCounter += 1;
         }
 
         public int DisplayCount()
         {
-            return _countChickens;
+            return _chickenCounter;
         }
     }
 }

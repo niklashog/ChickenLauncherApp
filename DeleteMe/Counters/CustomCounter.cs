@@ -9,15 +9,15 @@ namespace ChickenLauncherApp.Counters
 {
     public class CustomCounter : ICustomCounter
     {
-        private int _countCustompicks;
-        public int Count()
+        private int _customCounter;
+        public void Count()
         {
-            return _countCustompicks += 1;
+            _customCounter += 1;
         }
 
         public int DisplayCount()
         {
-            return _countCustompicks;
+            return _customCounter;
         }
     }
 }

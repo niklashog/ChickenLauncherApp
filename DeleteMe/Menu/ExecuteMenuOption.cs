@@ -1,4 +1,5 @@
-﻿using ChickenLauncherApp.Factories;
+﻿using ChickenLauncherApp.Counters;
+using ChickenLauncherApp.Factories;
 using ChickenLauncherApp.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,31 +11,35 @@ namespace ChickenLauncherApp.Menu
 {
     public class ExecuteMenuOption : IExecuteMenuOption
     {
-        private readonly IChickenLauncher _chickenLauncher;
-        private readonly IChickenCounter _chickenCounter;
-        private readonly ICustomLauncher _customLauncher;
-        private readonly ICustomCounter _customCounter;
+        private IChickenLauncher _chickenLauncher;
+        private ICustomLauncher _customLauncher;
+        private IChickenCounter _chickenCounter;
+        private ICustomCounter _customCounter;
+
         public ExecuteMenuOption(
-            IChickenLauncher chickenLauncher, IChickenCounter chickenCounter,
-            ICustomLauncher customLauncher, ICustomCounter customCounter)
+            IChickenLauncher chickenLauncher,
+            ICustomLauncher customLauncher,
+            IChickenCounter chickenCounter,
+            ICustomCounter customCounter)
         {
-            
+            _chickenLauncher = chickenLauncher;
+            _customLauncher = customLauncher;
+            _chickenCounter = chickenCounter;
+            _customCounter = customCounter;
         }
-        public void Execute(int index, ref bool running, 
-            IChickenLauncher chickenLauncher, IChickenCounter chickenCounter,
-            ICustomLauncher customLauncher, ICustomCounter customCounter)
+        public void Execute(int index, ref bool running)
         {
 
             switch (index)
             {
                 case 0:
-                    chickenLauncher.Launch();
-                    chickenCounter.Count();
+                    _chickenLauncher.Launch();
+                    _chickenCounter.Count();
                     break;
 
                 case 1:
-                    customLauncher.Launch();
-                    customCounter.Count();
+                    _customLauncher.Launch();
+                    _customCounter.Count();
                     break;
 
                 case 2:

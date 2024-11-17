@@ -8,7 +8,7 @@ namespace ChickenLauncherApp.Interfaces
 {
     public interface ICounter
     {
-        public int Count();
+        public void Count();
         public int DisplayCount();
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChickenLauncherApp.Interfaces
 {
-    public interface IExecuteMenuOption
+    public interface IMenuHighlight
     {
-        public void Execute(int index, ref bool running);
+        public void MenuHighlighter(string[] menuItems, ref int selectedIndex);
     }
 }
