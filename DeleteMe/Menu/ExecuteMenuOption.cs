@@ -9,37 +9,25 @@ using System.Threading.Tasks;
 
 namespace ChickenLauncherApp.Menu
 {
-    public class ExecuteMenuOption : IExecuteMenuOption
+    public class ExecuteMenuOption(
+        IChickenLauncher chickenLauncher,
+        ICustomLauncher customLauncher,
+        IChickenCounter chickenCounter,
+        ICustomCounter customCounter) : IExecuteMenuOption
     {
-        private IChickenLauncher _chickenLauncher;
-        private ICustomLauncher _customLauncher;
-        private IChickenCounter _chickenCounter;
-        private ICustomCounter _customCounter;
-
-        public ExecuteMenuOption(
-            IChickenLauncher chickenLauncher,
-            ICustomLauncher customLauncher,
-            IChickenCounter chickenCounter,
-            ICustomCounter customCounter)
-        {
-            _chickenLauncher = chickenLauncher;
-            _customLauncher = customLauncher;
-            _chickenCounter = chickenCounter;
-            _customCounter = customCounter;
-        }
         public void Execute(int index, ref bool running)
         {
 
             switch (index)
             {
                 case 0:
-                    _chickenLauncher.Launch();
-                    _chickenCounter.Count();
+                    chickenLauncher.Launch();
+                    chickenCounter.Count();
                     break;
 
                 case 1:
-                    _customLauncher.Launch();
-                    _customCounter.Count();
+                    customLauncher.Launch();
+                    customCounter.Count();
                     break;
 
                 case 2:

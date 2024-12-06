@@ -11,29 +11,13 @@ using ChickenLauncherApp.Factories;
 
 namespace ChickenLauncherApp
 {
-    public class App : IApp
+    public class App(
+        IDisplayLaunchCounter launchCounter,
+        IDisplayLogo displayLogo,
+        IExecuteMenuOption execute,
+        IMenuNavigation menuNavigation,
+        IMenuHighlight menuHighlight) : IApp
     {
-        private IDisplayLaunchCounter _launchCounter;
-        private IDisplayLogo _displayLogo;
-        private IExecuteMenuOption _executeMenuOption;
-        private IMenuNavigation _menuNavigation;
-        private IMenuHighlight _menuHighlight;
-
-        public App(
-
-            IDisplayLaunchCounter launchCounter,
-            IDisplayLogo displayLogo,
-            IExecuteMenuOption execute,
-            IMenuNavigation menuNavigation,
-            IMenuHighlight menuHighlight)
-        {
-
-            _launchCounter = launchCounter;
-            _displayLogo = displayLogo;
-            _executeMenuOption = execute;
-            _menuNavigation = menuNavigation;
-            _menuHighlight = menuHighlight;
-        }
         public void Run()
         {
             string[] menuItems = {
@@ -46,11 +30,11 @@ namespace ChickenLauncherApp
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine(_displayLogo.Print());
+                Console.WriteLine(displayLogo.Print());
 
-                _menuHighlight.MenuHighlighter(menuItems, ref selectedIndex);
-                _launchCounter.PrintCount();
-                _menuNavigation.MenuNavigator(menuItems, ref running, ref selectedIndex);
+                menuHighlight.MenuHighlighter(menuItems, ref selectedIndex);
+                launchCounter.PrintCount();
+                menuNavigation.MenuNavigator(menuItems, ref running, ref selectedIndex);
             }
         }
     }

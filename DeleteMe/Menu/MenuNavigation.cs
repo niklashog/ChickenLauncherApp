@@ -7,15 +7,9 @@ using System.Threading.Tasks;
 
 namespace ChickenLauncherApp.Menu
 {
-    public class MenuNavigation : IMenuNavigation
+    public class MenuNavigation(
+        IExecuteMenuOption executeMenuOption) : IMenuNavigation
     {
-        private IExecuteMenuOption _executeMenuOption;
-
-        public MenuNavigation(IExecuteMenuOption executeMenuOption)
-        {
-            _executeMenuOption = executeMenuOption;
-        }
-
         public void MenuNavigator(string[] menuItems, ref bool running, ref int selectedIndex)
         {
                 var key = Console.ReadKey(true).Key;
@@ -29,7 +23,7 @@ namespace ChickenLauncherApp.Menu
                     selectedIndex = (selectedIndex == menuItems.Length - 1) ? 0 : selectedIndex + 1;
                     break;
                 case ConsoleKey.Enter:
-                    _executeMenuOption.Execute(
+                    executeMenuOption.Execute(
                         selectedIndex,
                         ref running);
                     break;
